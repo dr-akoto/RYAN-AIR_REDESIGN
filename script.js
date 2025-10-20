@@ -263,7 +263,7 @@ if (bookingForm) {
     bookingForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        const bookingReference = 'RYN' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        const bookingReference = 'RYN' + Math.random().toString(36).substring(2, 11).toUpperCase();
         
         const passengerData = {
             firstName: document.getElementById('firstName').value,

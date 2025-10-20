@@ -511,6 +511,65 @@ footer {
     margin: 1rem 0;
 }
 
+/* Additional Utility Classes */
+.section-title {
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.checkbox-label {
+    margin-top: 1.5rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+.submit-button {
+    margin-top: 2rem;
+}
+
+.booking-ref-label {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+}
+
+.booking-ref-code {
+    letter-spacing: 2px;
+}
+
+.confirmation-details {
+    text-align: left;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: 8px;
+}
+
+.confirmation-actions {
+    margin-top: 2rem;
+}
+
+.confirmation-help {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.confirmation-help p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.section-heading {
+    margin-top: 2rem;
+}
+
+.form-full-width {
+    grid-column: 1 / -1;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .hamburger {
