@@ -121,6 +121,13 @@ function generateFlights(origin, destination) {
     return flights;
 }
 
+// HTML escape function to prevent XSS
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 // Load and display flight results
 function loadFlightResults() {
     const flightListContainer = document.getElementById('flightList');
@@ -139,14 +146,14 @@ function loadFlightResults() {
     if (searchInfoContainer) {
         searchInfoContainer.innerHTML = `
             <h2>Available Flights</h2>
-            <p>${searchData.origin} → ${searchData.destination}</p>
-            <p>${new Date(searchData.departDate).toLocaleDateString('en-US', { 
+            <p>${escapeHtml(searchData.origin)} → ${escapeHtml(searchData.destination)}</p>
+            <p>${escapeHtml(new Date(searchData.departDate).toLocaleDateString('en-US', { 
                 weekday: 'short', 
                 year: 'numeric', 
                 month: 'short', 
                 day: 'numeric' 
-            })}</p>
-            <p>${searchData.passengers} passenger(s) • ${searchData.class}</p>
+            }))}</p>
+            <p>${escapeHtml(searchData.passengers)} passenger(s) • ${escapeHtml(searchData.class)}</p>
         `;
     }
     
@@ -156,21 +163,21 @@ function loadFlightResults() {
     flightListContainer.innerHTML = flights.map(flight => `
         <div class="flight-card">
             <div class="flight-info">
-                <div class="flight-time">${flight.departTime}</div>
-                <div class="flight-airport">${searchData.origin}</div>
-                <div class="flight-airline">${flight.airline} ${flight.id}</div>
+                <div class="flight-time">${escapeHtml(flight.departTime)}</div>
+                <div class="flight-airport">${escapeHtml(searchData.origin)}</div>
+                <div class="flight-airline">${escapeHtml(flight.airline)} ${escapeHtml(flight.id)}</div>
             </div>
             <div class="flight-duration">
-                <div>${flight.duration}</div>
+                <div>${escapeHtml(flight.duration)}</div>
                 <div>${flight.stops === 0 ? 'Non-stop' : '1 Stop'}</div>
             </div>
             <div class="flight-info">
-                <div class="flight-time">${flight.arriveTime}</div>
-                <div class="flight-airport">${searchData.destination}</div>
+                <div class="flight-time">${escapeHtml(flight.arriveTime)}</div>
+                <div class="flight-airport">${escapeHtml(searchData.destination)}</div>
             </div>
             <div class="flight-price">
-                <div class="price-amount">$${flight.price}</div>
-                <button class="btn-book" onclick="selectFlight('${flight.id}', ${flight.price}, '${flight.departTime}', '${flight.arriveTime}')">Select</button>
+                <div class="price-amount">$${escapeHtml(flight.price.toString())}</div>
+                <button class="btn-book" onclick="selectFlight('${escapeHtml(flight.id)}', ${flight.price}, '${escapeHtml(flight.departTime)}', '${escapeHtml(flight.arriveTime)}')">Select</button>
             </div>
         </div>
     `).join('');
@@ -215,43 +222,43 @@ function loadBookingPage() {
         <h3>Booking Summary</h3>
         <div class="summary-item">
             <span>Route:</span>
-            <span>${flightData.origin} → ${flightData.destination}</span>
+            <span>${escapeHtml(flightData.origin)} → ${escapeHtml(flightData.destination)}</span>
         </div>
         <div class="summary-item">
             <span>Date:</span>
-            <span>${new Date(flightData.departDate).toLocaleDateString()}</span>
+            <span>${escapeHtml(new Date(flightData.departDate).toLocaleDateString())}</span>
         </div>
         <div class="summary-item">
             <span>Flight:</span>
-            <span>${flightData.flightId}</span>
+            <span>${escapeHtml(flightData.flightId)}</span>
         </div>
         <div class="summary-item">
             <span>Departure:</span>
-            <span>${flightData.departTime}</span>
+            <span>${escapeHtml(flightData.departTime)}</span>
         </div>
         <div class="summary-item">
             <span>Arrival:</span>
-            <span>${flightData.arriveTime}</span>
+            <span>${escapeHtml(flightData.arriveTime)}</span>
         </div>
         <div class="summary-item">
             <span>Passengers:</span>
-            <span>${flightData.passengers}</span>
+            <span>${escapeHtml(flightData.passengers)}</span>
         </div>
         <div class="summary-item">
             <span>Class:</span>
-            <span>${flightData.class}</span>
+            <span>${escapeHtml(flightData.class)}</span>
         </div>
         <div class="summary-item">
             <span>Base Fare:</span>
-            <span>$${flightData.price}</span>
+            <span>$${escapeHtml(flightData.price.toString())}</span>
         </div>
         <div class="summary-item">
             <span>Taxes & Fees:</span>
-            <span>$${taxes}</span>
+            <span>$${escapeHtml(taxes.toString())}</span>
         </div>
         <div class="summary-item summary-total">
             <span>Total:</span>
-            <span>$${total}</span>
+            <span>$${escapeHtml(total.toString())}</span>
         </div>
     `;
 }
@@ -295,14 +302,14 @@ function loadConfirmation() {
     document.getElementById('bookingRef').textContent = bookingData.bookingReference;
     
     confirmationDetails.innerHTML = `
-        <p><strong>Passenger:</strong> ${bookingData.firstName} ${bookingData.lastName}</p>
-        <p><strong>Email:</strong> ${bookingData.email}</p>
-        <p><strong>Route:</strong> ${flightData.origin} → ${flightData.destination}</p>
-        <p><strong>Date:</strong> ${new Date(flightData.departDate).toLocaleDateString()}</p>
-        <p><strong>Flight:</strong> ${flightData.flightId}</p>
-        <p><strong>Departure:</strong> ${flightData.departTime}</p>
-        <p><strong>Arrival:</strong> ${flightData.arriveTime}</p>
-        <p class="confirmation-note">A confirmation email has been sent to ${bookingData.email}</p>
+        <p><strong>Passenger:</strong> ${escapeHtml(bookingData.firstName)} ${escapeHtml(bookingData.lastName)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(bookingData.email)}</p>
+        <p><strong>Route:</strong> ${escapeHtml(flightData.origin)} → ${escapeHtml(flightData.destination)}</p>
+        <p><strong>Date:</strong> ${escapeHtml(new Date(flightData.departDate).toLocaleDateString())}</p>
+        <p><strong>Flight:</strong> ${escapeHtml(flightData.flightId)}</p>
+        <p><strong>Departure:</strong> ${escapeHtml(flightData.departTime)}</p>
+        <p><strong>Arrival:</strong> ${escapeHtml(flightData.arriveTime)}</p>
+        <p class="confirmation-note">A confirmation email has been sent to ${escapeHtml(bookingData.email)}</p>
     `;
 }
 
