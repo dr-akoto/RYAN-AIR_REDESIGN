@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed - Ryan Air</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>RYAN<span>AIR</span></h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#flights">Flights</a></li>
+                    <li><a href="#destinations">Destinations</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="confirmation-section">
+            <div class="container">
+                <div class="confirmation-card">
+                    <div class="success-icon">✓</div>
+                    <h2>Booking Confirmed!</h2>
+                    <p>Thank you for choosing Ryan Air</p>
+                    
+                    <div class="booking-reference">
+                        <p class="booking-ref-label">Booking Reference:</p>
+                        <p id="bookingRef" class="booking-ref-code"></p>
+                    </div>
+                    
+                    <div id="confirmationDetails" class="confirmation-details">
+                        <!-- Details will be loaded here by JavaScript -->
+                    </div>
+                    
+                    <div class="confirmation-actions">
+                        <a href="index.html" class="btn-primary" style="display: inline-block; text-decoration: none; padding: 1rem 2rem;">Book Another Flight</a>
+                    </div>
+                    
+                    <div class="confirmation-help">
+                        <p>
+                            Need help? Contact our support team at<br>
+                            <strong>info@ryanair.com</strong> or <strong>+1-800-RYAN-AIR</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Ryan Air</h4>
+                    <p>Your trusted partner for affordable air travel since 1985.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">My Bookings</a></li>
+                        <li><a href="#">Check-in</a></li>
+                        <li><a href="#">Flight Status</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@ryanair.com</p>
+                    <p>Phone: +1-800-RYAN-AIR</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Ryan Air. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
